@@ -1,31 +1,15 @@
-name: CI/CD Pipeline to AWS EC2
+name: Deploy to AWS EC2
+  uses: appleboy/ssh-action@v1.2.0
+  with:
+    host: ${{ secrets.EC2_HOST }}
+    username: ${{ secrets.EC2_USER }}
+    key: ${{ secrets.EC2_SSH_KEY }}
+    port: 22
+    script: |
+      mkdir -p ~/ecommerce-3tier-app
+      cd ~/ecommerce-3tier-app
 
-on:
-  push:
-    branches:
-      - main
+      git pull origin main
 
-jobs:
-  deploy:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
-
-      - name: Deploy to AWS EC2
-        uses: appleboy/ssh-action@v1.2.0
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USERNAME }}
-          key: ${{ secrets.EC2_PRIVATE_KEY }}
-          script: |
-            # Navigate to project directory (creates it if it doesn't exist)
-            mkdir -p ~/ecommerce-3tier-app
-            cd ~/ecommerce-3tier-app
-            
-            # Pull latest changes from Git
-            git pull origin main
-            
-            # Rebuild and restart Docker containers in detached mode
-            docker-compose down
-            docker-compose up -d --build
+      docker compose down
+      docker compose up -d --build
