@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Store</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f4f9;}
+        .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .product-card { border: 1px solid #ccc; padding: 15px; margin: 10px 0; border-radius: 5px; background: #fff; display: flex; justify-content: space-between;}
+        .form-group { margin-bottom: 20px; display: flex; gap: 10px; }
+        input { padding: 10px; flex: 1; border: 1px solid #ccc; border-radius: 4px;}
+        button { padding: 10px 20px; background: #28a745; color: white; border: none; border-radius: 4px; cursor: pointer; font-weight: bold;}
+        button:hover { background: #218838; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Cloud E-Commerce Store</h1>
+        
+        <div>
+            <h3>Add New Product</h3>
+            <div class="form-group">
+                <input type="text" id="name" placeholder="Product Name (e.g., Wireless Headphones)">
+                <input type="number" id="price" placeholder="Price ($)">
+                <button onclick="addProduct()">Add Product</button>
+            </div>
+        </div>
+
+        <h3>Available Products</h3>
+        <div id="product-list">
+            <p>Loading products...</p>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
